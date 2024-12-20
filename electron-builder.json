@@ -1,0 +1,15 @@
+{
+    "appId": "com.electron-reactjs-template.demo",
+    "files": ["dist-electron", "dist-react"],
+    "icon": "./Icon2.png",
+    "mac": {
+        "target": "dmg"
+    },
+    "linux": {
+        "target": "AppImage",
+        "category": "Utility"
+    },
+    "win": {
+        "target": ["portable", "msi"]
+    }
+}
