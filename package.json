@@ -6,6 +6,7 @@
   "main": "src/controller/main",
   "scripts": {
     "dev": "electron .",
+    "tsc:electron": "tsc --project src/controller/tsconfig.json",
     "dev:web": "vite",
     "build:web": "tsc -b && vite build",
     "lint:web": "eslint .",
