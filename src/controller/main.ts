@@ -1,9 +1,13 @@
 import { app, BrowserWindow } from "electron";
 import path from "path";
-
-type test = string;
+import { isDev } from "./utils/index.js";
 
 app.on("ready", () => {
   const win = new BrowserWindow({});
-  win.loadFile(path.join(app.getAppPath(), "/dist-web/index.html"));
+
+  if (isDev()) {
+    win.loadURL("http://localhost:8000");
+  } else {
+    win.loadFile(path.join(app.getAppPath(), "/dist-web/index.html"));
+  }
 });

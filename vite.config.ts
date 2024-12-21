@@ -8,4 +8,8 @@ export default defineConfig({
   build: {
     outDir: "dist-web",
   },
+  server: {
+    port: 8000,
+    strictPort: true,
+  }
 });
