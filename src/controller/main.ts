@@ -8,6 +8,6 @@ app.on("ready", () => {
   if (isDev()) {
     win.loadURL("http://localhost:8000");
   } else {
-    win.loadFile(path.join(app.getAppPath(), "/dist-web/index.html"));
+    win.loadFile(path.join(app.getAppPath(), "../dist-web/index.html"));
   }
 });
