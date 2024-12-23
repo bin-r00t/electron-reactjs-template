@@ -22,10 +22,10 @@ function App() {
             type="text"
             className="border min-w-96 rounded-md p-1 px-3 focus:outline-indigo-800 outline-offset-2"
           />
-          <button className="bg-indigo-800 text-white p-2 px-5 rounded-md text-xs">
+          <button className="bg-indigo-800 text-white p-2 px-5 rounded-md text-xs hover:bg-indigo-900 transition">
             Choose File
           </button>
-          <button className="bg-indigo-100 text-indigo-800 p-2 px-5 rounded-md text-xs">
+          <button className="bg-indigo-100 text-indigo-800 p-2 px-5 rounded-md text-xs hover:bg-indigo-200 transition">
             Dirs
           </button>
         </div>
@@ -34,10 +34,16 @@ function App() {
             Need Help?
           </a>
           <a href="#" className="underline hover:text-gray-800 cursor-pointer">
-            Document
+            Docs
           </a>
           <a href="#" className="underline hover:text-gray-800 cursor-pointer">
             Contact
+          </a>
+          <a href="#" className="underline hover:text-gray-800 cursor-pointer">
+            History
+          </a>
+          <a href="#" className="underline hover:text-gray-800 cursor-pointer">
+            License
           </a>
         </p>
       </div>
