@@ -2,6 +2,10 @@ import "./App.css";
 import ReactIcon from "./assets/react.svg";
 
 function App() {
+
+  // @ts-ignore
+  console.log('In React:------------', window.electron.hello())
+
   return (
     <>
       <div className="app-main flex-1 flex flex-col items-center gap-6 justify-center ">

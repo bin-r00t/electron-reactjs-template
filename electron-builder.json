@@ -1,6 +1,7 @@
 {
     "appId": "com.electron-reactjs-template.demo",
-    "files": ["dist-electron", "dist-react"],
+    "files": ["dist-electron"],
+    "extraResources": ["dist-electron/preload.cjs", "dist-web"],
     "icon": "./Icon2.png",
     "mac": {
         "target": "dmg"
