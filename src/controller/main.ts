@@ -1,6 +1,28 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, dialog, ipcMain } from "electron";
 import path from "path";
 import { isDev } from "./utils/index.js";
+
+/** select file */
+const handleSelectFile: (
+  type: "file" | "dir"
+) => Promise<string | null> = async (type = "file") => {
+  const result = await dialog.showOpenDialog({
+    properties: [type === "file" ? "openFile" : "openDirectory"],
+    filters: [
+      {
+        name: "Videos",
+        extensions: ["mp4", "mkv", "avi", "webm", "mov", "flv", "wmv"],
+      },
+      { name: "All Files", extensions: ["*"] },
+    ],
+  });
+
+  if (!result.canceled) {
+    return result.filePaths[0];
+  }
+
+  return null;
+};
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -15,6 +37,17 @@ const createWindow = () => {
       ),
     },
   });
+
+  /** IPC */
+  // choose file
+  ipcMain.handle("select-file", async () => {
+    return await handleSelectFile("file");
+  });
+  // choose directory
+  ipcMain.handle("select-dir", async () => {
+    return await handleSelectFile("dir");
+  });
+  /** end IPC */
 
   if (isDev()) {
     win.loadURL("http://localhost:8000");
