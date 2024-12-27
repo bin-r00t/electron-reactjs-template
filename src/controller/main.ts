@@ -24,7 +24,7 @@ const handleSelectFile: (
   return null;
 };
 
-const createWindow = () => {
+const createWindow = (initial: boolean) => {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -38,16 +38,16 @@ const createWindow = () => {
     },
   });
 
-  /** IPC */
-  // choose file
-  ipcMain.handle("select-file", async () => {
-    return await handleSelectFile("file");
-  });
-  // choose directory
-  ipcMain.handle("select-dir", async () => {
-    return await handleSelectFile("dir");
-  });
-  /** end IPC */
+  if (initial) {
+    // choose file
+    ipcMain.handle("select-file", async () => {
+      return await handleSelectFile("file");
+    });
+    // choose directory
+    ipcMain.handle("select-dir", async () => {
+      return await handleSelectFile("dir");
+    });
+  }
 
   if (isDev()) {
     win.loadURL("http://localhost:8000");
@@ -57,11 +57,11 @@ const createWindow = () => {
 };
 
 app.whenReady().then(() => {
-  createWindow();
+  createWindow(true);
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
+      createWindow(false);
     }
   });
 });

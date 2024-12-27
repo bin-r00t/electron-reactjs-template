@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import BrandLogo from "./assets/logo.png";
 
@@ -8,13 +8,17 @@ function App() {
     type: "file",
   });
 
+  useEffect(() => {
+    console.info("filePath...", filePath.url, "...");
+  }, [filePath]);
+
   /** 选择文件 */
   const handleChooseFile = async () => {
     // issue: https://stackoverflow.com/questions/71309058/property-showsavefilepicker-does-not-exist-on-type-window-typeof-globalthis
     // @ts-ignore
     const filePath = await window.electron.toggleSelectFile();
     setFilePath({
-      url: filePath as string,
+      url: filePath ?? "",
       type: "file",
     });
   };
@@ -24,7 +28,7 @@ function App() {
     // @ts-ignore
     const dirPath = await window.electron.toggleSelectDir();
     setFilePath({
-      url: dirPath as string,
+      url: dirPath ?? "",
       type: "directory",
     });
     console.log("dir path", dirPath);
@@ -58,7 +62,7 @@ function App() {
             className="border min-w-96 rounded-md p-1 px-3 focus:outline-indigo-800 outline-offset-2 text-xs text-gray-600 text-ellipsis overflow-hidden text-nowrap"
           />
           <button
-            className="bg-indigo-800 text-white p-2 px-5 rounded-md text-xs hover:bg-indigo-900 transition"
+            className="bg-indigo-800 text-white p-2 px-5 whitespace-nowrap rounded-md text-xs hover:bg-indigo-900 transition"
             onClick={handleChooseFile}
           >
             Choose File
@@ -71,7 +75,7 @@ function App() {
           </button>
         </div>
         <div className="hidden-area">
-          {filePath?.url !== "" && (
+          {filePath?.url != null && filePath.url !== "" && (
             <button
               onClick={handleToNext}
               className="bg-green-600 text-white text-xs p-2 px-8 rounded-xl cursor-pointer hover:bg-green-500 transition"
